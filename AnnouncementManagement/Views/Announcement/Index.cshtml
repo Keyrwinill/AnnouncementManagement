@@ -1,0 +1,116 @@
+﻿@model AnnouncementManagement.ViewModels.AnnouncementSearchViewModel
+
+@{
+    ViewData["Title"] = "公告維護";
+}
+
+<h2>公告維護</h2>
+
+<form asp-controller="Announcement"
+      asp-action="Index"
+      method="get">
+
+    <div class="mb-3">
+        <label class="form-label">上架日期</label>
+
+        <input asp-for="PublishStart"
+               type="date"
+               class="form-control d-inline-block"
+               style="width: 200px;" />
+
+        <span>～</span>
+
+        <input asp-for="PublishEnd"
+               type="date"
+               class="form-control d-inline-block"
+               style="width: 200px;" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">
+            公告標題
+        </label>
+
+        <input asp-for="Title"
+               class="form-control"
+               style="width: 400px;" />
+    </div>
+
+    <div class="mb-3">
+        <a asp-controller="Announcement"
+           asp-action="Index"
+           class="btn btn-secondary">
+            清除
+        </a>
+
+        <button type="submit"
+                class="btn btn-primary">
+            查詢
+        </button>
+    </div>
+</form>
+
+<hr />
+
+<div class="mb-3">
+    <a asp-controller="Announcement"
+       asp-action="Create"
+       class="btn btn-success">
+        新增
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>類別</th>
+            <th>公告標題</th>
+            <th>上架開始</th>
+            <th>上架結束</th>
+            <th>置頂</th>
+            <th>排序</th>
+            <th>顯示狀態</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>@item.Category</td>
+
+                <td>@item.Title</td>
+
+                <td>
+                    @item.PublishStart.ToString("yyyy/MM/dd HH:mm")
+                </td>
+
+                <td>
+                    @item.PublishEnd.ToString("yyyy/MM/dd HH:mm")
+                </td>
+
+                <td>
+                    @(item.IsPinned ? "是" : "否")
+                </td>
+
+                <td>
+                    @item.SortOrder
+                </td>
+
+                <td>
+                    @(item.IsVisible ? "顯示" : "不顯示")
+                </td>
+
+                <td>
+                    <a asp-controller="Announcement"
+                       asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-sm btn-primary">
+                        編輯
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

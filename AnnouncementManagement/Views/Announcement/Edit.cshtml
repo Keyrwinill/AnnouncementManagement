@@ -1,0 +1,131 @@
+﻿@model AnnouncementManagement.ViewModels.AnnouncementEditViewModel
+
+@{
+    ViewData["Title"] = "編輯公告";
+}
+
+<h2>編輯公告</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label">
+            類別
+        </label>
+
+        <select asp-for="Category" class="form-select">
+            <option value="">請選擇</option>
+            <option value="啟保通告">啟保通告</option>
+            <option value="技術通告">技術通告</option>
+            <option value="客服通知">客服通知</option>
+        </select>
+
+        <span asp-validation-for="Category"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">
+            公告標題
+        </label>
+
+        <input asp-for="Title"
+               class="form-control" />
+
+        <span asp-validation-for="Title"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PublishStart" class="form-label">
+            上架開始時間
+        </label>
+
+        <input asp-for="PublishStart"
+               type="datetime-local"
+               class="form-control" />
+
+        <span asp-validation-for="PublishStart"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PublishEnd" class="form-label">
+            上架結束時間
+        </label>
+
+        <input asp-for="PublishEnd"
+               type="datetime-local"
+               class="form-control" />
+
+        <span asp-validation-for="PublishEnd"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="IsPinned"
+               class="form-check-input" />
+
+        <label asp-for="IsPinned"
+               class="form-check-label">
+            公告置頂
+        </label>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SortOrder"
+               class="form-label">
+            排序
+        </label>
+
+        <input asp-for="SortOrder"
+               type="number"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="IsVisible"
+               class="form-label">
+            顯示狀態
+        </label>
+
+        <select asp-for="IsVisible"
+                class="form-select">
+            <option value="true">顯示</option>
+            <option value="false">不顯示</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Content"
+               class="form-label">
+            公告內容
+        </label>
+
+        <textarea asp-for="Content"
+                  class="form-control"
+                  rows="8"></textarea>
+
+        <span asp-validation-for="Content"
+              class="text-danger"></span>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        儲存
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        返回
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
