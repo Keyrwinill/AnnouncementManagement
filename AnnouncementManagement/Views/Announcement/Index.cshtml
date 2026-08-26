@@ -10,6 +10,9 @@
       asp-action="Index"
       method="get">
 
+    <div asp-validation-summary="All"
+         class="text-danger"></div>
+
     <div class="mb-3">
         <label class="form-label">上架日期</label>
 
@@ -66,7 +69,6 @@
             <th>類別</th>
             <th>公告標題</th>
             <th>上架開始</th>
-            <th>上架結束</th>
             <th>置頂</th>
             <th>排序</th>
             <th>顯示狀態</th>
@@ -84,9 +86,9 @@
 
                 <td>
                     @item.PublishStart.ToString("yyyy/MM/dd HH:mm")
-                </td>
-
-                <td>
+                    <br />
+                    ～
+                    <br />
                     @item.PublishEnd.ToString("yyyy/MM/dd HH:mm")
                 </td>
 

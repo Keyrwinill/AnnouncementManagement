@@ -25,14 +25,20 @@ public class AnnouncementService : IAnnouncementService
 
 		if (publishStart.HasValue)
 		{
-			query = query.Where(x =>
-				x.PublishStart >= publishStart.Value);
-		}
+			// Announcement.End >= Search.Start
+			var start = publishStart.Value.Date;
 
+			query = query.Where(x =>
+				x.PublishEnd >= start);
+		}
+		
 		if (publishEnd.HasValue)
 		{
+			// Announcement.Start <= Search.End
+			var endExclusive = publishEnd.Value.Date.AddDays(1);
+
 			query = query.Where(x =>
-				x.PublishEnd <= publishEnd.Value);
+				x.PublishStart <= endExclusive);
 		}
 
 		if (!string.IsNullOrWhiteSpace(title))
@@ -42,6 +48,7 @@ public class AnnouncementService : IAnnouncementService
 		}
 
 		return await query
+			.AsNoTracking()
 			.OrderByDescending(x => x.IsPinned)
 			.ThenBy(x => x.SortOrder)
 			.ThenByDescending(x => x.PublishStart)

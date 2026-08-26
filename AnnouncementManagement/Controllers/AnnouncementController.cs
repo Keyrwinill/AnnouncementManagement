@@ -7,11 +7,14 @@ namespace AnnouncementManagement.Controllers;
 public class AnnouncementController : Controller
 {
 	private readonly IAnnouncementService _announcementService;
+	private readonly ILogger<AnnouncementController> _logger;
 
 	public AnnouncementController(
-		IAnnouncementService announcementService)
+		IAnnouncementService announcementService,
+		ILogger<AnnouncementController> logger)
 	{
 		_announcementService = announcementService;
+		_logger = logger;
 	}
 
 	[HttpGet]
@@ -26,6 +29,17 @@ public class AnnouncementController : Controller
 			PublishEnd = publishEnd,
 			Title = title
 		};
+
+		if (publishStart.HasValue &&
+			publishEnd.HasValue &&
+			publishStart.Value.Date > publishEnd.Value.Date)
+		{
+			ModelState.AddModelError(
+				nameof(model.PublishEnd),
+				"查詢結束日期不可早於開始日期");
+
+			return View(model);
+		}
 
 		model.Results = await _announcementService.SearchAsync(
 			publishStart,
@@ -57,18 +71,24 @@ public class AnnouncementController : Controller
 			return View(model);
 		}
 
-		if (model.PublishStart > model.PublishEnd)
+		try
 		{
+			await _announcementService.CreateAsync(model);
+
+			return RedirectToAction(nameof(Index));
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(
+				ex,
+				"Failed to create announcement.");
+
 			ModelState.AddModelError(
-				nameof(model.PublishEnd),
-				"上架結束時間不可早於開始時間");
+				string.Empty,
+				"新增公告時發生錯誤，請稍後再試");
 
 			return View(model);
 		}
-
-		await _announcementService.CreateAsync(model);
-
-		return RedirectToAction(nameof(Index));
 	}
 
 	[HttpGet]
@@ -94,22 +114,29 @@ public class AnnouncementController : Controller
 			return View(model);
 		}
 
-		if (model.PublishStart > model.PublishEnd)
+		try
 		{
+			var success = await _announcementService.UpdateAsync(model);
+
+			if (!success)
+			{
+				return NotFound();
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(
+				ex,
+				"Failed to update announcement. Id: {AnnouncementId}",
+				model.Id);
+
 			ModelState.AddModelError(
-				nameof(model.PublishEnd),
-				"上架結束時間不可早於開始時間");
+				string.Empty,
+				"修改公告時發生錯誤，請稍後再試");
 
 			return View(model);
 		}
-
-		var success = await _announcementService.UpdateAsync(model);
-
-		if (!success)
-		{
-			return NotFound();
-		}
-
-		return RedirectToAction(nameof(Index));
 	}
 }

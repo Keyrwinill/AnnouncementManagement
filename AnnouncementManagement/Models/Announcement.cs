@@ -23,5 +23,5 @@ public class Announcement
 	public bool IsVisible { get; set; }
 
 	[MaxLength(4000)]
-	public string Content { get; set; } = string.Empty;
+	public string? Content { get; set; }
 }
