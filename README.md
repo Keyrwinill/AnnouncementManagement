@@ -85,3 +85,7 @@ The project includes validation for:
 - 公告內容使用 multiline TextArea。
 - Controller 與 EF Core DbContext 之間使用 Service layer。
 - Read-only query 使用 `AsNoTracking()`。
+
+## Future Work
+
+- Add xUnit。
