@@ -25,11 +25,11 @@ public class AnnouncementService : IAnnouncementService
 
 		if (publishStart.HasValue)
 		{
-			// Announcement.End >= Search.Start
+			// Announcement.Start >= Search.Start
 			var start = publishStart.Value.Date;
 
 			query = query.Where(x =>
-				x.PublishEnd >= start);
+				x.PublishStart >= start);
 		}
 		
 		if (publishEnd.HasValue)
