@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="AnnouncementManagement.Tests/AnnouncementManagement.Tests.csproj" Id="e416bab2-aab1-4d4b-9e33-eb2358f806d3" />
   <Project Path="AnnouncementManagement/AnnouncementManagement.csproj" />
 </Solution>
