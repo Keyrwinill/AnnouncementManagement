@@ -20,7 +20,7 @@ public class Announcement
 
 	public int SortOrder { get; set; }
 
-	public bool IsVisible { get; set; }
+	public bool IsPublish { get; set; }
 
 	[MaxLength(4000)]
 	public string? Content { get; set; }

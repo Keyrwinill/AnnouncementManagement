@@ -24,7 +24,7 @@ namespace AnnouncementManagement.ViewModels
 		[Range(0, int.MaxValue, ErrorMessage = "排序不可小於 0")]
 		public int SortOrder { get; set; }
 
-		public bool IsVisible { get; set; }
+		public bool IsPublish { get; set; }
 
 		[MaxLength(4000, ErrorMessage = "公告內容不可超過 4000 個字元")]
 		public string? Content { get; set; }

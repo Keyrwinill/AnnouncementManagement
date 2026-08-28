@@ -55,7 +55,7 @@ public class AnnouncementController : Controller
 	{
 		var model = new AnnouncementEditViewModel
 		{
-			IsVisible = true
+			IsPublish = true
 		};
 
 		return View(model);

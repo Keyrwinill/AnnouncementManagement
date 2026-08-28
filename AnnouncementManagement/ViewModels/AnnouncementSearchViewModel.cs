@@ -28,5 +28,5 @@ public class AnnouncementListItemViewModel
 
 	public int SortOrder { get; set; }
 
-	public bool IsVisible { get; set; }
+	public bool IsPublish { get; set; }
 }

@@ -28,7 +28,7 @@ public class AnnouncementServiceTests
 				PublishEnd = DateTime.Now.AddDays(1),
 				IsPinned = false,
 				SortOrder = 1,
-				IsVisible = true,
+				IsPublish = true,
 				Content = ""
 			},
 			new Announcement
@@ -40,7 +40,7 @@ public class AnnouncementServiceTests
 				PublishEnd = DateTime.Now.AddDays(1),
 				IsPinned = true,
 				SortOrder = 10,
-				IsVisible = true,
+				IsPublish = true,
 				Content = ""
 			});
 
@@ -80,7 +80,7 @@ public class AnnouncementServiceTests
 			PublishEnd = new DateTime(2026, 8, 28, 10, 0, 0),
 			IsPinned = true,
 			SortOrder = 1,
-			IsVisible = true,
+			IsPublish = true,
 			Content = "Test content"
 		};
 
@@ -95,7 +95,7 @@ public class AnnouncementServiceTests
 		Assert.Equal("技術通告", announcement.Category);
 		Assert.True(announcement.IsPinned);
 		Assert.Equal(1, announcement.SortOrder);
-		Assert.True(announcement.IsVisible);
+		Assert.True(announcement.IsPublish);
 		Assert.Equal("Test content", announcement.Content);
 	}
 }

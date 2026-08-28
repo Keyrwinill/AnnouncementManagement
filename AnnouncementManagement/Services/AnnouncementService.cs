@@ -61,7 +61,7 @@ public class AnnouncementService : IAnnouncementService
 				PublishEnd = x.PublishEnd,
 				IsPinned = x.IsPinned,
 				SortOrder = x.SortOrder,
-				IsVisible = x.IsVisible
+				IsPublish = x.IsPublish
 			})
 			.ToListAsync();
 	}
@@ -76,7 +76,7 @@ public class AnnouncementService : IAnnouncementService
 			PublishEnd = model.PublishEnd!.Value,
 			IsPinned = model.IsPinned,
 			SortOrder = model.SortOrder,
-			IsVisible = model.IsVisible,
+			IsPublish = model.IsPublish,
 			Content = model.Content
 		};
 
@@ -99,7 +99,7 @@ public class AnnouncementService : IAnnouncementService
 				PublishEnd = x.PublishEnd,
 				IsPinned = x.IsPinned,
 				SortOrder = x.SortOrder,
-				IsVisible = x.IsVisible,
+				IsPublish = x.IsPublish,
 				Content = x.Content
 			})
 			.FirstOrDefaultAsync();
@@ -126,7 +126,7 @@ public class AnnouncementService : IAnnouncementService
 		announcement.PublishEnd = model.PublishEnd!.Value;
 		announcement.IsPinned = model.IsPinned;
 		announcement.SortOrder = model.SortOrder;
-		announcement.IsVisible = model.IsVisible;
+		announcement.IsPublish = model.IsPublish;
 		announcement.Content = model.Content;
 
 		await _dbContext.SaveChangesAsync();
