@@ -86,6 +86,10 @@ The project includes validation for:
 - Controller 與 EF Core DbContext 之間使用 Service layer。
 - Read-only query 使用 `AsNoTracking()`。
 
-## Future Work
+## Screenshots
 
-- Add xUnit。
+Search
+![Search](AnnouncementManagement/Screenshots/search.png "Search")
+
+Create/Edit
+![Create/Edit](AnnouncementManagement/Screenshots/edit.png "Create/Edit")
